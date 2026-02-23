@@ -1,0 +1,1632 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenith Financeira - Justiça Financeira</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    * {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .hero-pattern {
+      background: linear-gradient(135deg, #ffffff 0%, #fef9e7 50%, #ffffff 100%);
+      position: relative;
+    }
+    
+    .hero-pattern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(212, 175, 55, 0.03) 50px, rgba(212, 175, 55, 0.03) 100px);
+      pointer-events: none;
+    }
+    
+    .gold-gradient {
+      transition: background 0.3s ease;
+    }
+    
+    .hover-lift {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+    }
+    
+    .gold-border {
+      transition: border-color 0.3s ease;
+    }
+    
+    .btn-gold {
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gold:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+    
+    .btn-outline-gold {
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-gold:hover {
+      transform: scale(1.05);
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-in {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      background: #25d366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+    
+    .calculator-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s ease;
+    }
+    
+    input[type="number"], input[type="text"], select, textarea {
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px;
+      width: 100%;
+      transition: border-color 0.3s ease;
+    }
+    
+    input[type="number"]:focus, input[type="text"]:focus, select:focus, textarea:focus {
+      outline: none;
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 30px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 4px solid white;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: calc(100% + 10px);
+      transition: background 0.3s ease;
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .seal {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      transition: background 0.3s ease;
+    }
+    
+    .page-section {
+      display: none;
+    }
+    
+    .page-section.active {
+      display: block;
+    }
+    
+    nav a {
+      cursor: pointer;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto bg-white"><!-- Header -->
+   <header class="w-full bg-white shadow-sm sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+     <div class="flex items-center gap-3">
+      <h1 id="logo-text" class="text-2xl font-display font-bold"></h1>
+     </div>
+     <div class="hidden md:flex gap-6 font-body"><a data-page="home" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Home</a> <a data-page="quem-somos" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Quem Somos</a> <a data-page="servicos" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Serviços</a> <a data-page="casos" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Casos de Sucesso</a> <a data-page="analise" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Faça sua Análise</a> <a data-page="blog" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Blog</a> <a data-page="contato" class="nav-link text-sm font-medium hover:text-opacity-70 transition-colors" style="color: #1f2937;">Contato</a>
+     </div><button id="nav-cta" class="btn-gold px-6 py-2 rounded-full text-sm font-semibold font-body">Contato</button>
+    </nav>
+   </header><!-- WhatsApp Float Button -->
+   <div id="whatsapp-float" class="whatsapp-float">
+    <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+   </div><!-- HOME PAGE -->
+   <div id="page-home" class="page-section active"><!-- Hero Section -->
+    <section class="w-full hero-pattern px-6 py-24 md:py-40">
+     <div class="max-w-6xl mx-auto text-center relative z-10">
+      <h2 id="hero-title" class="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight drop-shadow-lg"></h2>
+      <p id="hero-subtitle" class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto font-body leading-relaxed" style="color: #1f2937; font-weight: 500;"></p><button id="hero-cta" class="btn-gold px-12 py-5 rounded-full text-xl font-semibold font-body shadow-2xl cta-button"></button>
+     </div>
+    </section><!-- Benefits Section -->
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+       <div class="text-center">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center benefit-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /> <path d="M2 17l10 5 10-5" /> <path d="M2 12l10 5 10-5" />
+         </svg>
+        </div>
+        <h3 id="benefit-1-title" class="text-xl font-display font-semibold mb-2" style="color: #1f2937;"></h3>
+        <p id="benefit-1-desc" class="font-body text-sm" style="color: #6b7280;"></p>
+       </div>
+       <div class="text-center">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center benefit-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /> <polyline points="9 22 9 12 15 12 15 22" />
+         </svg>
+        </div>
+        <h3 id="benefit-2-title" class="text-xl font-display font-semibold mb-2" style="color: #1f2937;"></h3>
+        <p id="benefit-2-desc" class="font-body text-sm" style="color: #6b7280;"></p>
+       </div>
+       <div class="text-center">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center benefit-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" />
+         </svg>
+        </div>
+        <h3 id="benefit-3-title" class="text-xl font-display font-semibold mb-2" style="color: #1f2937;"></h3>
+        <p id="benefit-3-desc" class="font-body text-sm" style="color: #6b7280;"></p>
+       </div>
+       <div class="text-center">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center benefit-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /> <polyline points="22 4 12 14.01 9 11.01" />
+         </svg>
+        </div>
+        <h3 id="benefit-4-title" class="text-xl font-display font-semibold mb-2" style="color: #1f2937;"></h3>
+        <p id="benefit-4-desc" class="font-body text-sm" style="color: #6b7280;"></p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Services Preview -->
+    <section class="w-full px-6 py-16" style="background: #fafafa;">
+     <div class="max-w-7xl mx-auto">
+      <h2 id="services-section-title" class="text-4xl font-display font-bold text-center mb-12"></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+       <div class="bg-white p-8 rounded-lg hover-lift service-card">
+        <div class="w-16 h-16 mb-6 rounded-full flex items-center justify-center service-icon">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23" /> <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+         </svg>
+        </div>
+        <h3 id="service-1-title" class="text-2xl font-display font-semibold mb-3" style="color: #1f2937;"></h3>
+        <p id="service-1-desc" class="font-body mb-6" style="color: #6b7280;"></p><button class="btn-outline-gold px-6 py-2 rounded-full text-sm font-semibold font-body cta-button">Solicitar análise gratuita</button>
+       </div>
+       <div class="bg-white p-8 rounded-lg hover-lift service-card">
+        <div class="w-16 h-16 mb-6 rounded-full flex items-center justify-center service-icon">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+         </svg>
+        </div>
+        <h3 id="service-2-title" class="text-2xl font-display font-semibold mb-3" style="color: #1f2937;"></h3>
+        <p id="service-2-desc" class="font-body mb-6" style="color: #6b7280;"></p><button class="btn-outline-gold px-6 py-2 rounded-full text-sm font-semibold font-body cta-button">Solicitar análise gratuita</button>
+       </div>
+      </div>
+      <div class="text-center mt-10"><button data-page="servicos" id="services-cta" class="nav-link btn-gold px-8 py-3 rounded-full text-base font-semibold font-body"></button>
+      </div>
+     </div>
+    </section><!-- Stats Section -->
+    <section class="w-full px-6 py-16 gold-gradient">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+       <div>
+        <div id="stat-1-value" class="stat-number text-white" data-target="5" data-prefix="+">
+         0
+        </div>
+        <p id="stat-1-label" class="font-body text-white text-lg mt-2"></p>
+       </div>
+       <div>
+        <div id="stat-2-value" class="stat-number text-white" data-target="2000" data-prefix="+">
+         0
+        </div>
+        <p id="stat-2-label" class="font-body text-white text-lg mt-2"></p>
+       </div>
+       <div>
+        <div id="stat-3-value" class="stat-number text-white" data-target="95" data-suffix="%">
+         0
+        </div>
+        <p id="stat-3-label" class="font-body text-white text-lg mt-2"></p>
+       </div>
+       <div>
+        <div id="stat-4-value" class="stat-number text-white" data-target="50" data-prefix="R$" data-suffix="M+">
+         0
+        </div>
+        <p id="stat-4-label" class="font-body text-white text-lg mt-2"></p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Testimonials -->
+    <section class="w-full px-6 py-16" style="background: #fafafa;">
+     <div class="max-w-7xl mx-auto">
+      <h2 id="testimonials-title" class="text-4xl font-display font-bold text-center mb-12"></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+       <div class="bg-white p-8 rounded-lg testimonial-card">
+        <div class="flex mb-4 star-rating">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+        </div>
+        <p id="testimonial-1-text" class="font-body mb-4" style="color: #6b7280;"></p>
+        <p id="testimonial-1-author" class="font-body font-semibold" style="color: #1f2937;"></p>
+       </div>
+       <div class="bg-white p-8 rounded-lg testimonial-card">
+        <div class="flex mb-4 star-rating">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+        </div>
+        <p id="testimonial-2-text" class="font-body mb-4" style="color: #6b7280;"></p>
+        <p id="testimonial-2-author" class="font-body font-semibold" style="color: #1f2937;"></p>
+       </div>
+       <div class="bg-white p-8 rounded-lg testimonial-card">
+        <div class="flex mb-4 star-rating">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+         </svg>
+        </div>
+        <p id="testimonial-3-text" class="font-body mb-4" style="color: #6b7280;"></p>
+        <p id="testimonial-3-author" class="font-body font-semibold" style="color: #1f2937;"></p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Trust Seal -->
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-5xl mx-auto text-center">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+       <div class="seal seal-left">
+        <div class="text-sm leading-tight">
+         +5 Anos<br>
+         de<br>
+         Experiência
+        </div>
+       </div>
+       <div>
+        <h3 id="trust-seal-title" class="text-3xl font-display font-bold mb-4"></h3>
+        <p id="trust-seal-subtitle" class="text-lg font-body" style="color: #1f2937;"></p>
+        <p id="trust-seal-desc" class="font-body" style="color: #6b7280;"></p>
+       </div>
+       <div class="seal seal-right">
+        <div class="text-sm leading-tight">
+         +2000<br>
+         Clientes<br>
+         Satisfeitos
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Final CTA -->
+    <section class="w-full px-6 py-16 gold-gradient">
+     <div class="max-w-4xl mx-auto text-center">
+      <h2 id="final-cta-title" class="text-4xl md:text-5xl font-display font-bold mb-6 text-white"></h2>
+      <p id="final-cta-subtitle" class="text-xl font-body mb-8 text-white"></p><button id="final-cta-button" class="bg-black text-white px-10 py-4 rounded-full text-lg font-semibold font-body hover:scale-105 transition-transform cta-button"></button>
+     </div>
+    </section>
+   </div><!-- QUEM SOMOS PAGE -->
+   <div id="page-quem-somos" class="page-section">
+    <section class="w-full hero-pattern px-6 py-20">
+     <div class="max-w-6xl mx-auto text-center">
+      <h2 id="about-page-title" class="text-5xl font-display font-bold mb-6"></h2>
+      <p id="about-page-subtitle" class="text-xl font-body" style="color: #1f2937;"></p>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-5xl mx-auto">
+      <p id="company-history" class="text-lg font-body leading-relaxed mb-8" style="color: #1f2937;"></p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+       <div class="text-center p-6 rounded-lg mvv-card">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center mvv-icon">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /> <polyline points="22 4 12 14.01 9 11.01" />
+         </svg>
+        </div>
+        <h3 class="text-xl font-display font-bold mb-3">Missão</h3>
+        <p id="company-mission" class="font-body" style="color: #6b7280;"></p>
+       </div>
+       <div class="text-center p-6 rounded-lg mvv-card">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center mvv-icon">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /> <circle cx="12" cy="12" r="3" />
+         </svg>
+        </div>
+        <h3 class="text-xl font-display font-bold mb-3">Visão</h3>
+        <p id="company-vision" class="font-body" style="color: #6b7280;"></p>
+       </div>
+       <div class="text-center p-6 rounded-lg mvv-card">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center mvv-icon">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /> <circle cx="12" cy="7" r="4" />
+         </svg>
+        </div>
+        <h3 class="text-xl font-display font-bold mb-3">Valores</h3>
+        <p id="company-values" class="font-body" style="color: #6b7280;"></p>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16" style="background: #fafafa;">
+     <div class="max-w-5xl mx-auto">
+      <h3 class="text-4xl font-display font-bold mb-12 text-center">Nossa Trajetória</h3>
+      <div class="max-w-3xl mx-auto">
+       <div class="timeline-item">
+        <h4 class="text-xl font-display font-bold mb-2" style="color: #1f2937;">2020 - Fundação</h4>
+        <p class="font-body" style="color: #6b7280;">Início das operações focadas em defesa do consumidor financeiro</p>
+       </div>
+       <div class="timeline-item">
+        <h4 class="text-xl font-display font-bold mb-2" style="color: #1f2937;">2021 - Primeiros Resultados</h4>
+        <p class="font-body" style="color: #6b7280;">Recuperação significativa para primeiros clientes lesados</p>
+       </div>
+       <div class="timeline-item">
+        <h4 class="text-xl font-display font-bold mb-2" style="color: #1f2937;">2022 - Expansão Digital</h4>
+        <p class="font-body" style="color: #6b7280;">Plataforma digital para atendimento ágil e transparente</p>
+       </div>
+       <div class="timeline-item">
+        <h4 class="text-xl font-display font-bold mb-2" style="color: #1f2937;">2023 - Crescimento Acelerado</h4>
+        <p class="font-body" style="color: #6b7280;">Ampliação da equipe e atendimento em vários estados</p>
+       </div>
+       <div class="timeline-item">
+        <h4 class="text-xl font-display font-bold mb-2" style="color: #1f2937;">2024 - Consolidação</h4>
+        <p class="font-body" style="color: #6b7280;">Mais de 2000 clientes atendidos e R$ 50 milhões recuperados</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- SERVIÇOS PAGE -->
+   <div id="page-servicos" class="page-section">
+    <section class="w-full hero-pattern px-6 py-20">
+     <div class="max-w-6xl mx-auto text-center">
+      <h2 id="services-page-title" class="text-5xl font-display font-bold mb-6"></h2>
+      <p id="services-page-subtitle" class="text-xl font-body" style="color: #1f2937;"></p>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+       <div class="bg-white p-10 rounded-xl hover-lift service-card">
+        <div class="w-20 h-20 mb-6 rounded-full flex items-center justify-center service-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23" /> <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+         </svg>
+        </div>
+        <h3 id="service-full-1-title" class="text-3xl font-display font-bold mb-4" style="color: #1f2937;"></h3>
+        <p id="service-full-1-desc" class="font-body text-lg mb-6" style="color: #6b7280;"></p><button class="btn-gold w-full py-3 rounded-full text-base font-semibold font-body cta-button">Solicitar análise gratuita</button>
+       </div>
+       <div class="bg-white p-10 rounded-xl hover-lift service-card">
+        <div class="w-20 h-20 mb-6 rounded-full flex items-center justify-center service-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+         </svg>
+        </div>
+        <h3 id="service-full-2-title" class="text-3xl font-display font-bold mb-4" style="color: #1f2937;"></h3>
+        <p id="service-full-2-desc" class="font-body text-lg mb-6" style="color: #6b7280;"></p><button class="btn-gold w-full py-3 rounded-full text-base font-semibold font-body cta-button">Solicitar análise gratuita</button>
+       </div>
+       <div class="bg-white p-10 rounded-xl hover-lift service-card">
+        <div class="w-20 h-20 mb-6 rounded-full flex items-center justify-center service-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /> <line x1="9" y1="9" x2="15" y2="15" /> <line x1="15" y1="9" x2="9" y2="15" />
+         </svg>
+        </div>
+        <h3 id="service-full-3-title" class="text-3xl font-display font-bold mb-4" style="color: #1f2937;"></h3>
+        <p id="service-full-3-desc" class="font-body text-lg mb-6" style="color: #6b7280;"></p><button class="btn-gold w-full py-3 rounded-full text-base font-semibold font-body cta-button">Solicitar análise gratuita</button>
+       </div>
+       <div class="bg-white p-10 rounded-xl hover-lift service-card">
+        <div class="w-20 h-20 mb-6 rounded-full flex items-center justify-center service-icon">
+         <svg class="w-10 h-10" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /> <polyline points="22 4 12 14.01 9 11.01" />
+         </svg>
+        </div>
+        <h3 id="service-full-4-title" class="text-3xl font-display font-bold mb-4" style="color: #1f2937;"></h3>
+        <p id="service-full-4-desc" class="font-body text-lg mb-6" style="color: #6b7280;"></p><button class="btn-gold w-full py-3 rounded-full text-base font-semibold font-body cta-button">Solicitar análise gratuita</button>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- CASOS PAGE -->
+   <div id="page-casos" class="page-section">
+    <section class="w-full hero-pattern px-6 py-20">
+     <div class="max-w-6xl mx-auto text-center">
+      <h2 id="cases-page-title" class="text-5xl font-display font-bold mb-6"></h2>
+      <p id="cases-page-subtitle" class="text-xl font-body" style="color: #1f2937;"></p>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 text-center">
+       <div class="p-6 rounded-lg case-stat-card">
+        <div class="text-5xl font-display font-bold mb-2">
+         +2000
+        </div>
+        <p class="font-body" style="color: #6b7280;">Processos Procedentes</p>
+       </div>
+       <div class="p-6 rounded-lg case-stat-card">
+        <div class="text-5xl font-display font-bold mb-2">
+         95%
+        </div>
+        <p class="font-body" style="color: #6b7280;">Taxa de Sucesso</p>
+       </div>
+       <div class="p-6 rounded-lg case-stat-card">
+        <div class="text-5xl font-display font-bold mb-2">
+         R$50M+
+        </div>
+        <p class="font-body" style="color: #6b7280;">Recuperados</p>
+       </div>
+       <div class="p-6 rounded-lg case-stat-card">
+        <div class="text-5xl font-display font-bold mb-2">
+         100%
+        </div>
+        <p class="font-body" style="color: #6b7280;">Satisfação</p>
+       </div>
+      </div>
+      <h3 class="text-4xl font-display font-bold mb-12 text-center">Processos Procedentes - Exemplos Reais</h3>
+      <div class="mb-16 space-y-6">
+       <div class="bg-white p-8 rounded-lg case-example-card">
+        <div class="flex items-start gap-4">
+         <div class="w-16 h-16 flex-shrink-0 rounded-full flex items-center justify-center text-2xl font-bold text-white case-number">
+          1
+         </div>
+         <div class="flex-1">
+          <h4 class="text-2xl font-display font-bold mb-2">Processo nº 1023456-78.2022.8.26.0100</h4>
+          <p class="font-body mb-3" style="color: #6b7280;"><strong>Tipo:</strong> Revisão de Financiamento de Veículo | <strong>Banco:</strong> Itaú</p>
+          <p class="font-body" style="color: #6b7280;"><strong>Resultado:</strong> Taxa reduzida de 3,89% para 1,95% a.m. Cliente recuperou R$ 47.300,00 em juros abusivos.</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-white p-8 rounded-lg case-example-card">
+        <div class="flex items-start gap-4">
+         <div class="w-16 h-16 flex-shrink-0 rounded-full flex items-center justify-center text-2xl font-bold text-white case-number">
+          2
+         </div>
+         <div class="flex-1">
+          <h4 class="text-2xl font-display font-bold mb-2">Processo nº 0034567-89.2021.8.19.0001</h4>
+          <p class="font-body mb-3" style="color: #6b7280;"><strong>Tipo:</strong> Busca e Apreensão | <strong>Banco:</strong> Bradesco</p>
+          <p class="font-body" style="color: #6b7280;"><strong>Resultado:</strong> Busca suspensa. Dívida de R$ 68.000 reduzida para R$ 39.400. Cliente manteve o veículo.</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-white p-8 rounded-lg case-example-card">
+        <div class="flex items-start gap-4">
+         <div class="w-16 h-16 flex-shrink-0 rounded-full flex items-center justify-center text-2xl font-bold text-white case-number">
+          3
+         </div>
+         <div class="flex-1">
+          <h4 class="text-2xl font-display font-bold mb-2">Processo nº 5012345-67.2023.8.26.0562</h4>
+          <p class="font-body mb-3" style="color: #6b7280;"><strong>Tipo:</strong> Empréstimo Consignado | <strong>Banco:</strong> BMG</p>
+          <p class="font-body" style="color: #6b7280;"><strong>Resultado:</strong> Seguro prestamista declarado nulo. Cliente recuperou R$ 23.800,00.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="text-center p-10 rounded-xl gold-gradient">
+       <h3 id="cases-cta-title" class="text-4xl font-display font-bold mb-6 text-white"></h3>
+       <p id="cases-cta-subtitle" class="text-xl font-body mb-8 text-white"></p><button id="cases-cta-button" class="bg-white px-10 py-4 rounded-full text-lg font-semibold font-body hover:scale-105 transition-transform cta-button"></button>
+      </div>
+     </div>
+    </section>
+   </div><!-- ANÁLISE PAGE -->
+   <div id="page-analise" class="page-section">
+    <section class="w-full hero-pattern px-6 py-20">
+     <div class="max-w-6xl mx-auto text-center">
+      <h2 id="analysis-page-title" class="text-5xl font-display font-bold mb-6"></h2>
+      <p id="analysis-page-subtitle" class="text-xl font-body" style="color: #1f2937;"></p>
+     </div>
+    </section><!-- Calculator Section -->
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-4xl mx-auto">
+      <h2 id="calculator-title" class="text-4xl font-display font-bold text-center mb-4"></h2>
+      <p id="calculator-subtitle" class="text-center font-body mb-10" style="color: #6b7280;"></p>
+      <div class="calculator-card">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div><label for="loan-amount" class="block font-body font-semibold mb-2" style="color: #1f2937;">Valor do Empréstimo (R$)</label> <input type="number" id="loan-amount" placeholder="Ex: 50000" class="font-body">
+        </div>
+        <div><label for="interest-rate" class="block font-body font-semibold mb-2" style="color: #1f2937;">Taxa de Juros (% ao mês)</label> <input type="number" id="interest-rate" placeholder="Ex: 5.5" step="0.1" class="font-body">
+        </div>
+       </div><button id="calculate-btn" class="btn-gold w-full py-3 rounded-lg text-base font-semibold font-body mb-6">Calcular</button>
+       <div id="calc-result" class="hidden p-6 rounded-lg calc-result-box">
+        <p class="font-body text-center text-lg font-semibold mb-2" style="color: #1f2937;">Resultado:</p>
+        <p id="calc-result-text" class="font-body text-center text-2xl font-bold"></p>
+        <p class="font-body text-center mt-4" style="color: #6b7280;">Taxa acima de 4% ao mês pode ser considerada abusiva</p>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16" style="background: #fafafa;">
+     <div class="max-w-4xl mx-auto">
+      <div class="calculator-card">
+       <h3 id="analysis-form-title" class="text-3xl font-display font-bold mb-6 text-center"></h3>
+       <p id="analysis-form-subtitle" class="text-center font-body mb-8" style="color: #6b7280;"></p>
+       <form id="analysis-form" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+         <div><label for="name" class="block font-body font-semibold mb-2" style="color: #1f2937;">Nome Completo *</label> <input type="text" id="name" required placeholder="Seu nome" class="font-body">
+         </div>
+         <div><label for="phone" class="block font-body font-semibold mb-2" style="color: #1f2937;">Telefone/WhatsApp *</label> <input type="text" id="phone" required placeholder="(00) 00000-0000" class="font-body">
+         </div>
+        </div>
+        <div><label for="email" class="block font-body font-semibold mb-2" style="color: #1f2937;">E-mail *</label> <input type="text" id="email" required placeholder="seu@email.com" class="font-body">
+        </div>
+        <div><label for="contract-type" class="block font-body font-semibold mb-2" style="color: #1f2937;">Tipo de Contrato *</label> <select id="contract-type" required class="font-body"> <option value="">Selecione...</option> <option value="financiamento-veiculo">Financiamento de Veículo</option> <option value="financiamento-imovel">Financiamento Imobiliário</option> <option value="emprestimo-pessoal">Empréstimo Pessoal</option> <option value="cartao-credito">Cartão de Crédito</option> <option value="busca-apreensao">Busca e Apreensão</option> </select>
+        </div>
+        <div><label for="message" class="block font-body font-semibold mb-2" style="color: #1f2937;">Descreva sua situação</label> <textarea id="message" rows="4" placeholder="Conte-nos mais sobre seu caso..." class="font-body"></textarea>
+        </div><button type="submit" class="btn-gold w-full py-4 rounded-lg text-lg font-semibold font-body">Enviar Solicitação</button>
+       </form>
+       <div id="form-success" class="hidden mt-6 p-6 rounded-lg text-center" style="background: rgba(16, 185, 129, 0.1);">
+        <svg class="w-16 h-16 mx-auto mb-4" fill="#10b981" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <h4 class="text-2xl font-display font-bold mb-2" style="color: #10b981;">Mensagem Enviada!</h4>
+        <p class="font-body" style="color: #6b7280;">Você será redirecionado para o WhatsApp com suas informações.</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- BLOG PAGE -->
+   <div id="page-blog" class="page-section">
+    <section class="w-full hero-pattern px-6 py-20">
+     <div class="max-w-6xl mx-auto text-center">
+      <h2 id="blog-page-title" class="text-5xl font-display font-bold mb-6"></h2>
+      <p id="blog-page-subtitle" class="text-xl font-body" style="color: #1f2937;"></p>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-7xl mx-auto"><!-- Blog Grid -->
+      <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+       <article class="bg-white rounded-lg overflow-hidden hover-lift blog-card cursor-pointer" data-article="1">
+        <div class="h-48 flex items-center justify-center text-6xl blog-image">
+         📊
+        </div>
+        <div class="p-6">
+         <div class="text-sm font-body mb-2 blog-category">
+          EDUCAÇÃO FINANCEIRA
+         </div>
+         <h3 id="blog-post-1-title" class="text-2xl font-display font-bold mb-3" style="color: #1f2937;"></h3>
+         <p id="blog-post-1-desc" class="font-body mb-4" style="color: #6b7280;"></p><span class="font-body font-semibold blog-link cursor-pointer">Ler mais →</span>
+        </div>
+       </article>
+       <article class="bg-white rounded-lg overflow-hidden hover-lift blog-card cursor-pointer" data-article="2">
+        <div class="h-48 flex items-center justify-center text-6xl blog-image">
+         ⚖️
+        </div>
+        <div class="p-6">
+         <div class="text-sm font-body mb-2 blog-category">
+          DIREITOS DO CONSUMIDOR
+         </div>
+         <h3 id="blog-post-2-title" class="text-2xl font-display font-bold mb-3" style="color: #1f2937;"></h3>
+         <p id="blog-post-2-desc" class="font-body mb-4" style="color: #6b7280;"></p><span class="font-body font-semibold blog-link cursor-pointer">Ler mais →</span>
+        </div>
+       </article>
+       <article class="bg-white rounded-lg overflow-hidden hover-lift blog-card cursor-pointer" data-article="3">
+        <div class="h-48 flex items-center justify-center text-6xl blog-image">
+         🚗
+        </div>
+        <div class="p-6">
+         <div class="text-sm font-body mb-2 blog-category">
+          BUSCA E APREENSÃO
+         </div>
+         <h3 id="blog-post-3-title" class="text-2xl font-display font-bold mb-3" style="color: #1f2937;"></h3>
+         <p id="blog-post-3-desc" class="font-body mb-4" style="color: #6b7280;"></p><span class="font-body font-semibold blog-link cursor-pointer">Ler mais →</span>
+        </div>
+       </article>
+      </div><!-- Full Article View -->
+      <div id="blog-article" class="hidden"><button id="back-to-blog" class="mb-6 font-body font-semibold blog-link flex items-center gap-2"> ← Voltar para o blog </button>
+       <div class="bg-white rounded-lg overflow-hidden blog-card p-8 md:p-12">
+        <div id="article-category" class="text-sm font-body mb-4 blog-category"></div>
+        <h2 id="article-title" class="text-4xl md:text-5xl font-display font-bold mb-6" style="color: #1f2937;"></h2>
+        <div id="article-content" class="font-body text-lg leading-relaxed space-y-6" style="color: #1f2937;"></div>
+        <div class="mt-12 p-8 rounded-lg" style="background: rgba(212, 175, 55, 0.1);">
+         <h3 class="text-2xl font-display font-bold mb-4" style="color: #1f2937;">Precisa de Ajuda?</h3>
+         <p class="font-body mb-6" style="color: #6b7280;">Nossa equipe está pronta para analisar seu caso gratuitamente.</p><button class="btn-gold px-8 py-3 rounded-full text-base font-semibold font-body cta-button">Solicitar Análise Gratuita</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- CONTATO PAGE -->
+   <div id="page-contato" class="page-section">
+    <section class="w-full hero-pattern px-6 py-20">
+     <div class="max-w-6xl mx-auto text-center">
+      <h2 id="contact-page-title" class="text-5xl font-display font-bold mb-6"></h2>
+      <p id="contact-page-subtitle" class="text-xl font-body" style="color: #1f2937;"></p>
+     </div>
+    </section>
+    <section class="w-full px-6 py-16 bg-white">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+       <div>
+        <h3 class="text-3xl font-display font-bold mb-8">Nossos Canais</h3>
+        <div class="space-y-6">
+         <div class="flex items-start gap-4">
+          <div class="w-14 h-14 flex-shrink-0 rounded-full flex items-center justify-center contact-icon">
+           <svg class="w-7 h-7" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="text-xl font-display font-bold mb-1" style="color: #1f2937;">Telefone</h4>
+           <p id="contact-phone" class="font-body" style="color: #6b7280;"></p>
+           <p class="font-body text-sm" style="color: #6b7280;">Seg-Sex: 9h às 18h</p>
+          </div>
+         </div>
+         <div class="flex items-start gap-4">
+          <div class="w-14 h-14 flex-shrink-0 rounded-full flex items-center justify-center" style="background: rgba(37, 211, 102, 0.2);">
+           <svg class="w-7 h-7" fill="#25d366" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="text-xl font-display font-bold mb-1" style="color: #1f2937;">WhatsApp</h4>
+           <p id="contact-whatsapp" class="font-body" style="color: #6b7280;"></p>
+           <p class="font-body text-sm" style="color: #6b7280;">Atendimento rápido</p>
+          </div>
+         </div>
+         <div class="flex items-start gap-4">
+          <div class="w-14 h-14 flex-shrink-0 rounded-full flex items-center justify-center contact-icon">
+           <svg class="w-7 h-7" viewbox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="text-xl font-display font-bold mb-1" style="color: #1f2937;">E-mail</h4>
+           <p id="contact-email" class="font-body" style="color: #6b7280;"></p>
+           <p class="font-body text-sm" style="color: #6b7280;">Resposta em até 24h</p>
+          </div>
+         </div>
+         <div class="flex items-start gap-4">
+          <div class="w-14 h-14 flex-shrink-0 rounded-full flex items-center justify-center" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
+           <svg class="w-7 h-7" fill="white" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="text-xl font-display font-bold mb-1" style="color: #1f2937;">Instagram</h4><a href="https://www.instagram.com/zenith_financeira" target="_blank" rel="noopener noreferrer" class="font-body hover:underline" style="color: #6b7280;">@zenith_financeira</a>
+           <p class="font-body text-sm" style="color: #6b7280;">Siga-nos</p>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div>
+        <div class="calculator-card">
+         <h3 class="text-3xl font-display font-bold mb-6 text-center">Envie uma Mensagem</h3>
+         <form id="contact-form" class="space-y-6">
+          <div><label for="contact-name" class="block font-body font-semibold mb-2" style="color: #1f2937;">Nome Completo *</label> <input type="text" id="contact-name" required placeholder="Seu nome" class="font-body">
+          </div>
+          <div><label for="contact-email" class="block font-body font-semibold mb-2" style="color: #1f2937;">E-mail *</label> <input type="text" id="contact-email" required placeholder="seu@email.com" class="font-body">
+          </div>
+          <div><label for="contact-message" class="block font-body font-semibold mb-2" style="color: #1f2937;">Mensagem *</label> <textarea id="contact-message" required rows="5" placeholder="Sua mensagem..." class="font-body"></textarea>
+          </div><button type="submit" class="btn-gold w-full py-4 rounded-lg text-lg font-semibold font-body">Enviar Mensagem</button>
+         </form>
+         <div id="contact-success" class="hidden mt-6 p-6 rounded-lg text-center" style="background: rgba(16, 185, 129, 0.1);">
+          <svg class="w-16 h-16 mx-auto mb-4" fill="#10b981" viewbox="0 0 20 20">
+           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          <h4 class="text-2xl font-display font-bold mb-2" style="color: #10b981;">Mensagem Enviada!</h4>
+          <p class="font-body" style="color: #6b7280;">Você será redirecionado para o WhatsApp com suas informações.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      logo_text: "Zenith Financeira",
+      hero_title: "Recupere o Que é Seu por Direito",
+      hero_subtitle: "Especialistas em revisão de contratos bancários e defesa contra juros abusivos. Mais de 20 anos lutando pela justiça financeira dos brasileiros.",
+      hero_cta: "Análise Gratuita",
+      
+      benefit_1_title: "Redução de Juros",
+      benefit_1_desc: "Identificamos e combatemos juros abusivos",
+      benefit_2_title: "Atuação Completa",
+      benefit_2_desc: "Administrativa e judicial",
+      benefit_3_title: "Atendimento Nacional",
+      benefit_3_desc: "Presente em todo o Brasil",
+      benefit_4_title: "+5 Anos",
+      benefit_4_desc: "De experiência e credibilidade",
+      
+      services_section_title: "Nossos Serviços",
+      service_1_title: "Revisão de Contratos Bancários",
+      service_1_desc: "Analisamos seu contrato e identificamos cobranças abusivas de juros, tarifas e encargos indevidos.",
+      service_2_title: "Defesa em Busca e Apreensão",
+      service_2_desc: "Protegemos seu patrimônio e evitamos a perda do seu veículo através de negociações estratégicas.",
+      services_cta: "Ver todos os serviços",
+      
+      stat_1_value: "5",
+      stat_1_label: "Anos de Experiência",
+      stat_2_value: "2000",
+      stat_2_label: "Clientes Atendidos",
+      stat_3_value: "95",
+      stat_3_label: "Taxa de Sucesso",
+      stat_4_value: "50",
+      stat_4_label: "Recuperados",
+      
+      calculator_title: "Calcule Juros Abusivos",
+      calculator_subtitle: "Descubra quanto você pode estar pagando a mais",
+      
+      testimonials_title: "O Que Dizem Nossos Clientes",
+      testimonial_1_text: "A Zenith conseguiu reduzir meus juros em 40%. Economizei mais de R$ 30 mil. Profissionais excepcionais!",
+      testimonial_1_author: "Maria Silva - São Paulo",
+      testimonial_2_text: "Evitaram a busca e apreensão do meu carro. Negociaram condições justas. Eternamente grato!",
+      testimonial_2_author: "João Santos - Rio de Janeiro",
+      testimonial_3_text: "Limparam meu nome e meu score subiu 200 pontos! Agora consigo crédito novamente. Recomendo!",
+      testimonial_3_author: "Ana Costa - Minas Gerais",
+      
+      trust_seal_title: "Transparência Total",
+      trust_seal_subtitle: "Sem processos no PROCON",
+      trust_seal_desc: "Compromisso com ética e resultados",
+      
+      final_cta_title: "Recupere Seu Dinheiro Hoje",
+      final_cta_subtitle: "Análise gratuita e sem compromisso. Fale com nossos especialistas agora.",
+      final_cta_button: "Falar no WhatsApp",
+      
+      about_page_title: "Quem Somos",
+      about_page_subtitle: "Anos transformando vidas através da justiça financeira",
+      company_history: "A Zenith Financeira nasceu em 2020 com uma missão clara: defender os direitos dos consumidores brasileiros contra práticas abusivas do sistema financeiro. Ao longo dos últimos anos, construímos uma trajetória sólida baseada em ética, transparência e resultados concretos.",
+      company_mission: "Defender os direitos financeiros dos brasileiros com ética, transparência e excelência técnica.",
+      company_vision: "Ser referência nacional em justiça financeira, transformando vidas através da educação e defesa do consumidor.",
+      company_values: "Ética, Transparência, Compromisso com Resultados, Respeito ao Cliente e Excelência Profissional.",
+      
+      services_page_title: "Nossos Serviços",
+      services_page_subtitle: "Soluções completas para sua justiça financeira",
+      service_full_1_title: "Revisão de Contratos Bancários",
+      service_full_1_desc: "Análise completa de contratos de financiamento, empréstimos e cartões de crédito.",
+      service_full_2_title: "Defesa em Busca e Apreensão",
+      service_full_2_desc: "Proteção contra apreensão de veículos e negociação estratégica.",
+      service_full_3_title: "Renegociação de Dívidas",
+      service_full_3_desc: "Negociação estratégica com instituições financeiras para redução de dívidas.",
+      service_full_4_title: "Limpeza de Nome e Score",
+      service_full_4_desc: "Remoção de negativações indevidas e recuperação do seu score de crédito.",
+      
+      cases_page_title: "Casos de Sucesso",
+      cases_page_subtitle: "Resultados reais que transformam vidas",
+      cases_cta_title: "Você Pode Ser o Próximo",
+      cases_cta_subtitle: "Análise gratuita e personalizada para seu caso",
+      cases_cta_button: "Solicitar Minha Análise",
+      
+      analysis_page_title: "Faça Sua Análise Gratuita",
+      analysis_page_subtitle: "Descubra quanto você pode recuperar",
+      analysis_form_title: "Solicite Análise do Seu Contrato",
+      analysis_form_subtitle: "Preencha o formulário abaixo e nossa equipe entrará em contato em até 24 horas",
+      
+      blog_page_title: "Blog Zenith",
+      blog_page_subtitle: "Educação financeira e direitos do consumidor",
+      blog_post_1_title: "Como Identificar Juros Abusivos",
+      blog_post_1_desc: "Saiba reconhecer quando você está pagando mais do que deveria.",
+      blog_post_2_title: "Seus Direitos em Contratos Bancários",
+      blog_post_2_desc: "O CDC protege você contra práticas abusivas. Conheça seus direitos.",
+      blog_post_3_title: "O Que Fazer em Caso de Busca e Apreensão",
+      blog_post_3_desc: "Guia completo para proteger seu veículo.",
+      
+      contact_page_title: "Fale Conosco",
+      contact_page_subtitle: "Estamos prontos para ajudar você",
+      contact_phone: "(11) 4994-2656",
+      contact_whatsapp: "(11) 94034-0262",
+      contact_email: "contato.zenithfinanceira@gmail.com",
+      
+      primary_color: "#d4af37",
+      background_color: "#ffffff",
+      text_color: "#1f2937",
+      secondary_color: "#6b7280",
+      accent_color: "#000000"
+    };
+
+    // Navigation
+    function showPage(pageName) {
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      const pageElement = document.getElementById(`page-${pageName}`);
+      if (pageElement) {
+        pageElement.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // Event listeners for navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        if (page) {
+          showPage(page);
+        }
+      });
+    });
+
+    // CTA buttons - ALL lead to analysis page
+    document.querySelectorAll('.cta-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('analise');
+      });
+    });
+
+    document.getElementById('nav-cta').addEventListener('click', (e) => {
+      e.preventDefault();
+      showPage('contato');
+    });
+
+    // WhatsApp button
+    document.getElementById('whatsapp-float').addEventListener('click', () => {
+      window.open('https://wa.me/5511940340262?text=Olá! Gostaria de solicitar uma análise gratuita do meu contrato.', '_blank', 'noopener,noreferrer');
+    });
+
+    // Calculator
+    document.getElementById('calculate-btn').addEventListener('click', () => {
+      const loanAmount = parseFloat(document.getElementById('loan-amount').value);
+      const interestRate = parseFloat(document.getElementById('interest-rate').value);
+      
+      if (!loanAmount || !interestRate) {
+        return;
+      }
+      
+      const monthlyInterest = loanAmount * (interestRate / 100);
+      const yearlyTotal = monthlyInterest * 12;
+      
+      const resultDiv = document.getElementById('calc-result');
+      const resultText = document.getElementById('calc-result-text');
+      
+      resultText.textContent = `Você pode estar pagando R$ ${yearlyTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})} por ano em juros`;
+      resultDiv.classList.remove('hidden');
+    });
+
+    // Forms send to WhatsApp
+    const analysisForm = document.getElementById('analysis-form');
+    if (analysisForm) {
+      analysisForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Collect form data
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const contractType = document.getElementById('contract-type').value;
+        const message = document.getElementById('message').value;
+        
+        // Format message for WhatsApp
+        let whatsappMessage = `🔔 *Nova Solicitação de Análise*\n\n`;
+        whatsappMessage += `👤 *Nome:* ${name}\n`;
+        whatsappMessage += `📱 *Telefone:* ${phone}\n`;
+        whatsappMessage += `📧 *E-mail:* ${email}\n`;
+        whatsappMessage += `📋 *Tipo de Contrato:* ${contractType}\n`;
+        if (message) {
+          whatsappMessage += `💬 *Mensagem:* ${message}`;
+        }
+        
+        // Open WhatsApp with the message
+        const whatsappURL = `https://wa.me/5511940340262?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+        
+        // Show success message
+        analysisForm.style.display = 'none';
+        document.getElementById('form-success').classList.remove('hidden');
+      });
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Collect form data
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const message = document.getElementById('contact-message').value;
+        
+        // Format message for WhatsApp
+        let whatsappMessage = `🔔 *Nova Mensagem de Contato*\n\n`;
+        whatsappMessage += `👤 *Nome:* ${name}\n`;
+        whatsappMessage += `📧 *E-mail:* ${email}\n`;
+        whatsappMessage += `💬 *Mensagem:* ${message}`;
+        
+        // Open WhatsApp with the message
+        const whatsappURL = `https://wa.me/5511940340262?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+        
+        // Show success message
+        contactForm.style.display = 'none';
+        document.getElementById('contact-success').classList.remove('hidden');
+      });
+    }
+
+    // Animate stats
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-number');
+      
+      stats.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const prefix = stat.getAttribute('data-prefix') || '';
+        const suffix = stat.getAttribute('data-suffix') || '';
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          stat.textContent = prefix + Math.floor(current) + suffix;
+        }, 16);
+      });
+    }
+
+    // Render function
+    async function render(config) {
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      
+      // Apply colors
+      document.getElementById('logo-text').style.color = primaryColor;
+      document.getElementById('hero-title').style.color = primaryColor;
+      
+      document.querySelectorAll('.btn-gold').forEach(el => {
+        el.style.background = primaryColor;
+        el.style.color = backgroundColor;
+      });
+      
+      document.querySelectorAll('.btn-outline-gold').forEach(el => {
+        el.style.borderColor = primaryColor;
+        el.style.color = primaryColor;
+      });
+      
+      document.querySelectorAll('.gold-gradient').forEach(el => {
+        el.style.background = `linear-gradient(135deg, ${primaryColor} 0%, #f4e4b7 100%)`;
+      });
+      
+      document.querySelectorAll('.benefit-icon, .service-icon, .mvv-icon, .contact-icon').forEach(el => {
+        el.style.background = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.1)`;
+      });
+      
+      document.querySelectorAll('.benefit-icon svg, .service-icon svg, .mvv-icon svg, .contact-icon svg').forEach(el => {
+        el.style.stroke = primaryColor;
+      });
+      
+      document.querySelectorAll('.service-card, .testimonial-card, .blog-card, .case-example-card').forEach(el => {
+        el.style.borderColor = primaryColor;
+        el.style.border = `2px solid ${primaryColor}`;
+      });
+      
+      document.querySelectorAll('.calculator-card').forEach(el => {
+        el.style.borderColor = primaryColor;
+        el.style.border = `2px solid ${primaryColor}`;
+      });
+      
+      document.querySelectorAll('.calc-result-box').forEach(el => {
+        el.style.background = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.1)`;
+      });
+      
+      document.getElementById('calc-result-text').style.color = primaryColor;
+      
+      document.querySelectorAll('.star-rating svg').forEach(el => {
+        el.style.fill = primaryColor;
+      });
+      
+      document.querySelectorAll('.seal-left, .seal-right, .case-number').forEach(el => {
+        el.style.background = primaryColor;
+      });
+      
+      document.querySelectorAll('.timeline-item::before').forEach(el => {
+        el.style.background = primaryColor;
+        el.style.boxShadow = `0 0 0 2px ${primaryColor}`;
+      });
+      
+      document.querySelectorAll('.timeline-item::after').forEach(el => {
+        el.style.background = primaryColor;
+      });
+      
+      document.querySelectorAll('.case-stat-card').forEach(el => {
+        el.style.background = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.05)`;
+      });
+      
+      document.querySelectorAll('.case-stat-card div:first-child').forEach(el => {
+        el.style.color = primaryColor;
+      });
+      
+      document.querySelectorAll('.blog-category, .blog-link').forEach(el => {
+        el.style.color = primaryColor;
+      });
+      
+      document.querySelectorAll('.blog-image').forEach(el => {
+        el.style.background = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.1)`;
+      });
+      
+      document.querySelectorAll('.mvv-card').forEach(el => {
+        el.style.background = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.05)`;
+      });
+      
+      document.querySelectorAll('.mvv-card h3, .about-page-title, .services-page-title, .cases-page-title, .analysis-page-title, .blog-page-title, .contact-page-title').forEach(el => {
+        el.style.color = primaryColor;
+      });
+      
+      document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.addEventListener('focus', function() {
+          this.style.borderColor = primaryColor;
+        });
+        el.addEventListener('blur', function() {
+          if (!this.value) {
+            this.style.borderColor = '#e5e7eb';
+          }
+        });
+      });
+      
+      document.querySelectorAll('.case-example-card h4').forEach(el => {
+        el.style.color = primaryColor;
+      });
+      
+      document.getElementById('cases-cta-button').style.color = primaryColor;
+      
+      document.getElementById('final-cta-button').style.color = primaryColor;
+      
+      // Update text content
+      const elements = {
+        'logo-text': config.logo_text,
+        'hero-title': config.hero_title,
+        'hero-subtitle': config.hero_subtitle,
+        'hero-cta': config.hero_cta,
+        'benefit-1-title': config.benefit_1_title,
+        'benefit-1-desc': config.benefit_1_desc,
+        'benefit-2-title': config.benefit_2_title,
+        'benefit-2-desc': config.benefit_2_desc,
+        'benefit-3-title': config.benefit_3_title,
+        'benefit-3-desc': config.benefit_3_desc,
+        'benefit-4-title': config.benefit_4_title,
+        'benefit-4-desc': config.benefit_4_desc,
+        'services-section-title': config.services_section_title,
+        'service-1-title': config.service_1_title,
+        'service-1-desc': config.service_1_desc,
+        'service-2-title': config.service_2_title,
+        'service-2-desc': config.service_2_desc,
+        'services-cta': config.services_cta,
+        'stat-1-label': config.stat_1_label,
+        'stat-2-label': config.stat_2_label,
+        'stat-3-label': config.stat_3_label,
+        'stat-4-label': config.stat_4_label,
+        'calculator-title': config.calculator_title,
+        'calculator-subtitle': config.calculator_subtitle,
+        'testimonials-title': config.testimonials_title,
+        'testimonial-1-text': config.testimonial_1_text,
+        'testimonial-1-author': config.testimonial_1_author,
+        'testimonial-2-text': config.testimonial_2_text,
+        'testimonial-2-author': config.testimonial_2_author,
+        'testimonial-3-text': config.testimonial_3_text,
+        'testimonial-3-author': config.testimonial_3_author,
+        'trust-seal-title': config.trust_seal_title,
+        'trust-seal-subtitle': config.trust_seal_subtitle,
+        'trust-seal-desc': config.trust_seal_desc,
+        'final-cta-title': config.final_cta_title,
+        'final-cta-subtitle': config.final_cta_subtitle,
+        'final-cta-button': config.final_cta_button,
+        'about-page-title': config.about_page_title,
+        'about-page-subtitle': config.about_page_subtitle,
+        'company-history': config.company_history,
+        'company-mission': config.company_mission,
+        'company-vision': config.company_vision,
+        'company-values': config.company_values,
+        'services-page-title': config.services_page_title,
+        'services-page-subtitle': config.services_page_subtitle,
+        'service-full-1-title': config.service_full_1_title,
+        'service-full-1-desc': config.service_full_1_desc,
+        'service-full-2-title': config.service_full_2_title,
+        'service-full-2-desc': config.service_full_2_desc,
+        'service-full-3-title': config.service_full_3_title,
+        'service-full-3-desc': config.service_full_3_desc,
+        'service-full-4-title': config.service_full_4_title,
+        'service-full-4-desc': config.service_full_4_desc,
+        'cases-page-title': config.cases_page_title,
+        'cases-page-subtitle': config.cases_page_subtitle,
+        'cases-cta-title': config.cases_cta_title,
+        'cases-cta-subtitle': config.cases_cta_subtitle,
+        'cases-cta-button': config.cases_cta_button,
+        'analysis-page-title': config.analysis_page_title,
+        'analysis-page-subtitle': config.analysis_page_subtitle,
+        'analysis-form-title': config.analysis_form_title,
+        'analysis-form-subtitle': config.analysis_form_subtitle,
+        'blog-page-title': config.blog_page_title,
+        'blog-page-subtitle': config.blog_page_subtitle,
+        'blog-post-1-title': config.blog_post_1_title,
+        'blog-post-1-desc': config.blog_post_1_desc,
+        'blog-post-2-title': config.blog_post_2_title,
+        'blog-post-2-desc': config.blog_post_2_desc,
+        'blog-post-3-title': config.blog_post_3_title,
+        'blog-post-3-desc': config.blog_post_3_desc,
+        'contact-page-title': config.contact_page_title,
+        'contact-page-subtitle': config.contact_page_subtitle,
+        'contact-phone': config.contact_phone,
+        'contact-whatsapp': config.contact_whatsapp,
+        'contact-email': config.contact_email
+      };
+      
+      Object.keys(elements).forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.textContent = elements[id];
+        }
+      });
+      
+      // Update stat values
+      document.getElementById('stat-1-value').setAttribute('data-target', config.stat_1_value);
+      document.getElementById('stat-2-value').setAttribute('data-target', config.stat_2_value);
+      document.getElementById('stat-3-value').setAttribute('data-target', config.stat_3_value);
+      document.getElementById('stat-4-value').setAttribute('data-target', config.stat_4_value);
+    }
+
+    // Blog articles data
+    const blogArticles = {
+      1: {
+        category: 'EDUCAÇÃO FINANCEIRA',
+        title: 'Como Identificar Juros Abusivos',
+        content: `
+          <p><strong>Identificar juros abusivos é fundamental para proteger suas finanças.</strong> Muitos consumidores pagam valores muito acima do justo sem perceber. Aqui estão as principais orientações:</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">1. Observe as Taxas Mensais e Anuais</h3>
+          <p>Sempre verifique a taxa de juros mensal (% a.m.) e anual (% a.a.) do seu contrato. Taxas acima de 4% ao mês podem ser consideradas abusivas. Compare com a taxa média do mercado para o tipo de empréstimo.</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">2. Calcule o Total Pago</h3>
+          <p>Faça as contas: multiplique o valor da parcela pelo número total de parcelas. Compare com o valor financiado. Se você vai pagar o dobro ou mais do valor original, pode haver juros abusivos.</p>
+          
+          <p><strong>Exemplo:</strong> Você financiou R$ 50.000 em 60 parcelas de R$ 1.800. Total a pagar: R$ 108.000. Você pagará R$ 58.000 de juros sobre R$ 50.000 - mais de 100% do valor financiado!</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">3. Cuidado com Taxas Embutidas</h3>
+          <p>Fique atento a cobranças extras que aumentam o custo total:</p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li><strong>Seguro Prestamista:</strong> Muitas vezes obrigatório sem justificativa</li>
+            <li><strong>TAC (Taxa de Abertura de Crédito):</strong> Considerada ilegal por vários tribunais</li>
+            <li><strong>Serviços de Proteção Financeira:</strong> Vendas casadas disfarçadas</li>
+            <li><strong>Seguros Opcionais:</strong> Apresentados como obrigatórios</li>
+          </ul>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">Sinais de Alerta</h3>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Taxa de juros não está clara no contrato</li>
+            <li>Você não entendeu todas as cobranças</li>
+            <li>Foram incluídos seguros ou serviços "automáticos"</li>
+            <li>As parcelas comprometem mais de 30% da sua renda</li>
+            <li>O vendedor pressionou você a assinar rapidamente</li>
+          </ul>
+          
+          <p class="font-bold mt-8">Identificou algum desses problemas? Você pode ter direito a revisão do contrato e devolução de valores pagos a mais.</p>
+        `
+      },
+      2: {
+        category: 'DIREITOS DO CONSUMIDOR',
+        title: 'Seus Direitos em Contratos Bancários',
+        content: `
+          <p><strong>O Código de Defesa do Consumidor (CDC) protege você contra práticas abusivas do sistema financeiro.</strong> Conheça seus direitos e saiba quando recorrer.</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">Direito de Recorrer Contra Contratos Abusivos</h3>
+          <p>Se você foi lesado em um contrato bancário, <strong>você tem total direito de recorrer</strong>. Não importa se você já assinou o contrato ou se já está pagando há meses ou anos. A lei protege o consumidor mesmo após a assinatura.</p>
+          
+          <p>Situações em que você pode recorrer:</p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Juros abusivos acima da taxa média do mercado</li>
+            <li>Cobranças de tarifas ilegais (TAC, TEC)</li>
+            <li>Seguros vendidos de forma obrigatória (venda casada)</li>
+            <li>Cláusulas contratuais abusivas ou pouco claras</li>
+            <li>Capitalização de juros ilegal</li>
+          </ul>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">Direito à Revisão de Parcelas</h3>
+          <p><strong>Você tem direito de ter suas parcelas revisadas!</strong> Se identificadas cobranças abusivas, o juiz pode determinar:</p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Redução da taxa de juros para valores justos</li>
+            <li>Recalculo de todas as parcelas (pagas e a pagar)</li>
+            <li>Diminuição do valor das parcelas futuras</li>
+            <li>Redução do saldo devedor total</li>
+          </ul>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">Devolução de Juros Pagos a Mais</h3>
+          <p><strong>Este é um dos seus direitos mais importantes:</strong> você pode receber de volta TODO o valor de juros abusivos que pagou a mais nas parcelas já quitadas!</p>
+          
+          <p>Como funciona:</p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Calculamos quanto você pagou a mais em cada parcela</li>
+            <li>Somamos todos os valores das parcelas já pagas</li>
+            <li>O banco é condenado a devolver esse dinheiro</li>
+            <li>Geralmente com correção monetária e juros legais</li>
+          </ul>
+          
+          <p class="p-6 rounded-lg my-6" style="background: rgba(212, 175, 55, 0.1);"><strong>Exemplo Real:</strong> Cliente pagou 24 parcelas de R$ 1.500 com juros de 5% a.m. Juízo determinou que a taxa justa seria 2% a.m. Resultado: Cliente recebeu de volta R$ 12.400 + redução de 35% nas parcelas restantes.</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">Restituição de Vendas Casadas</h3>
+          <p><strong>Venda casada é ILEGAL.</strong> Se cobraram seguros, serviços ou produtos como condição para liberar o crédito, você tem direito a:</p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Cancelamento imediato dos serviços</li>
+            <li>Devolução de TODOS os valores já pagos</li>
+            <li>Remoção desses valores do seu contrato</li>
+            <li>Recalculo das parcelas sem esses custos</li>
+          </ul>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">Como Exercer Seus Direitos</h3>
+          <p>Para garantir seus direitos, você precisa:</p>
+          <ol class="list-decimal pl-6 space-y-2 my-4">
+            <li>Reunir toda a documentação do contrato</li>
+            <li>Solicitar análise técnica especializada (gratuita)</li>
+            <li>Ingressar com ação revisional ou administrativa</li>
+            <li>Aguardar decisão favorável (95% de sucesso em casos procedentes)</li>
+          </ol>
+          
+          <p class="font-bold mt-8" style="color: #d4af37;">Não tenha medo de buscar seus direitos. O CDC existe para proteger você, e os tribunais estão cada vez mais favoráveis aos consumidores em casos de abuso bancário.</p>
+        `
+      },
+      3: {
+        category: 'BUSCA E APREENSÃO',
+        title: 'O Que Fazer em Caso de Busca e Apreensão',
+        content: `
+          <p><strong>Recebeu notificação de busca e apreensão do seu veículo?</strong> Não entre em pânico. Tempo é essencial, mas existem soluções. Este guia completo vai te orientar passo a passo.</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">⏰ URGENTE: Aja nas Primeiras 24 Horas</h3>
+          <p class="p-6 rounded-lg" style="background: rgba(220, 38, 38, 0.1); color: #991b1b;"><strong>ATENÇÃO:</strong> As primeiras 24 horas após a apreensão ou notificação são CRUCIAIS. Quanto mais rápido você agir, maiores as chances de recuperar seu veículo e negociar condições favoráveis.</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">🚨 Passo 1: Procure Assessoria Especializada Imediatamente</h3>
+          <p><strong>Por que é tão importante agir rápido?</strong></p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Após a apreensão, o veículo pode ser leiloado em poucos dias</li>
+            <li>Existem prazos judiciais curtíssimos para contestação</li>
+            <li>Cada dia que passa, aumentam os custos de pátio e guincho</li>
+            <li>A negociação é mais favorável antes do leilão</li>
+          </ul>
+          
+          <p><strong>O que uma assessoria especializada faz:</strong></p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Analisa seu contrato em busca de ilegalidades</li>
+            <li>Verifica se a busca e apreensão foi realizada corretamente</li>
+            <li>Identifica vícios e irregularidades no processo</li>
+            <li>Define a melhor estratégia: judicial ou negociação</li>
+          </ul>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">⚖️ Passo 2: Recurso de Recuperação de Posse</h3>
+          <p>Nossa equipe pode entrar com <strong>Ação de Revisão Contratual com pedido de Recuperação de Posse</strong>. Este recurso legal permite:</p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Suspender a apreensão imediatamente</li>
+            <li>Recuperar o veículo que já foi apreendido</li>
+            <li>Questionar juros abusivos e cobranças indevidas</li>
+            <li>Ganhar tempo para negociar ou quitar o débito</li>
+          </ul>
+          
+          <p><strong>Quando o recurso tem mais chances de sucesso:</strong></p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Você pagou mais de 40% do contrato</li>
+            <li>Existem juros abusivos ou cobranças ilegais</li>
+            <li>Houve vícios na notificação ou no processo</li>
+            <li>O banco não tentou negociação prévia</li>
+          </ul>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">💰 Passo 3: Negociação da Dívida Dentro do Seu Orçamento</h3>
+          <p><strong>Nosso time negocia diretamente com o banco considerando sua realidade financeira.</strong> Buscamos condições que realmente cabem no seu bolso:</p>
+          
+          <p><strong>Tipos de negociação que fazemos:</strong></p>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li><strong>Quitação com Desconto:</strong> Redução de 30% a 70% do saldo devedor</li>
+            <li><strong>Parcelamento Acessível:</strong> Parcelas que cabem no seu orçamento</li>
+            <li><strong>Revisão do Contrato:</strong> Redução de juros e remoção de taxas abusivas</li>
+            <li><strong>Entrada Facilitada:</strong> Negociação de entrada mínima + parcelas</li>
+          </ul>
+          
+          <p class="p-6 rounded-lg my-6" style="background: rgba(212, 175, 55, 0.1);"><strong>Caso Real:</strong> Cliente com dívida de R$ 45.000. Conseguimos negociação de quitação por R$ 18.000 em 12x de R$ 1.500. Veículo recuperado e cliente economizou R$ 27.000.</p>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">📝 O Que Você Precisa Fazer AGORA</h3>
+          <ol class="list-decimal pl-6 space-y-3 my-4">
+            <li><strong>Entre em contato nas primeiras 24h:</strong> Quanto antes, melhor</li>
+            <li><strong>Separe toda documentação:</strong> Contrato, notificações, comprovantes de pagamento</li>
+            <li><strong>Informe sua situação financeira real:</strong> Assim negociamos dentro do possível</li>
+            <li><strong>Não faça acordos diretos:</strong> Bancos sempre oferecem condições piores</li>
+            <li><strong>Não assine nada sem orientação:</strong> Alguns documentos podem prejudicar sua defesa</li>
+          </ol>
+          
+          <h3 class="text-2xl font-display font-bold mt-8 mb-4" style="color: #1f2937;">✅ Seus Direitos em Busca e Apreensão</h3>
+          <ul class="list-disc pl-6 space-y-2 my-4">
+            <li>Direito de ser notificado antes da apreensão</li>
+            <li>Direito de contestar juros e encargos abusivos</li>
+            <li>Direito de recuperar o veículo mesmo após apreensão</li>
+            <li>Direito de negociar a dívida</li>
+            <li>Direito de receber de volta valores pagos a mais</li>
+          </ul>
+          
+          <div class="p-6 rounded-lg mt-8" style="background: rgba(16, 185, 129, 0.1); color: #065f46;">
+            <p class="font-bold text-xl mb-3">⚡ Não Perca Tempo!</p>
+            <p>A cada hora que passa, suas opções diminuem. Entre em contato AGORA para análise gratuita do seu caso. Podemos começar a trabalhar imediatamente para proteger seu veículo e sua família.</p>
+          </div>
+        `
+      }
+    };
+
+    // Blog article functions
+    function showBlogArticle(articleId) {
+      const article = blogArticles[articleId];
+      if (!article) return;
+      
+      document.getElementById('blog-grid').classList.add('hidden');
+      document.getElementById('blog-article').classList.remove('hidden');
+      
+      document.getElementById('article-category').textContent = article.category;
+      document.getElementById('article-title').textContent = article.title;
+      document.getElementById('article-content').innerHTML = article.content;
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showBlogGrid() {
+      document.getElementById('blog-grid').classList.remove('hidden');
+      document.getElementById('blog-article').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Blog article click handlers
+    document.querySelectorAll('[data-article]').forEach(article => {
+      article.addEventListener('click', (e) => {
+        e.preventDefault();
+        const articleId = article.getAttribute('data-article');
+        showBlogArticle(articleId);
+      });
+    });
+
+    document.getElementById('back-to-blog').addEventListener('click', (e) => {
+      e.preventDefault();
+      showBlogGrid();
+    });
+
+    // Initialize
+    render(defaultConfig);
+    
+    // Animate stats when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    
+    document.querySelectorAll('.stat-number').forEach(stat => {
+      observer.observe(stat);
+    });
+
+    // Element SDK integration
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          await render(config);
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["logo_text", config.logo_text || defaultConfig.logo_text],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+          ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
+          ["benefit_1_title", config.benefit_1_title || defaultConfig.benefit_1_title],
+          ["benefit_1_desc", config.benefit_1_desc || defaultConfig.benefit_1_desc],
+          ["benefit_2_title", config.benefit_2_title || defaultConfig.benefit_2_title],
+          ["benefit_2_desc", config.benefit_2_desc || defaultConfig.benefit_2_desc],
+          ["benefit_3_title", config.benefit_3_title || defaultConfig.benefit_3_title],
+          ["benefit_3_desc", config.benefit_3_desc || defaultConfig.benefit_3_desc],
+          ["benefit_4_title", config.benefit_4_title || defaultConfig.benefit_4_title],
+          ["benefit_4_desc", config.benefit_4_desc || defaultConfig.benefit_4_desc],
+          ["services_section_title", config.services_section_title || defaultConfig.services_section_title],
+          ["service_1_title", config.service_1_title || defaultConfig.service_1_title],
+          ["service_1_desc", config.service_1_desc || defaultConfig.service_1_desc],
+          ["service_2_title", config.service_2_title || defaultConfig.service_2_title],
+          ["service_2_desc", config.service_2_desc || defaultConfig.service_2_desc],
+          ["services_cta", config.services_cta || defaultConfig.services_cta],
+          ["stat_1_value", config.stat_1_value || defaultConfig.stat_1_value],
+          ["stat_1_label", config.stat_1_label || defaultConfig.stat_1_label],
+          ["stat_2_value", config.stat_2_value || defaultConfig.stat_2_value],
+          ["stat_2_label", config.stat_2_label || defaultConfig.stat_2_label],
+          ["stat_3_value", config.stat_3_value || defaultConfig.stat_3_value],
+          ["stat_3_label", config.stat_3_label || defaultConfig.stat_3_label],
+          ["stat_4_value", config.stat_4_value || defaultConfig.stat_4_value],
+          ["stat_4_label", config.stat_4_label || defaultConfig.stat_4_label],
+          ["calculator_title", config.calculator_title || defaultConfig.calculator_title],
+          ["calculator_subtitle", config.calculator_subtitle || defaultConfig.calculator_subtitle],
+          ["testimonials_title", config.testimonials_title || defaultConfig.testimonials_title],
+          ["testimonial_1_text", config.testimonial_1_text || defaultConfig.testimonial_1_text],
+          ["testimonial_1_author", config.testimonial_1_author || defaultConfig.testimonial_1_author],
+          ["testimonial_2_text", config.testimonial_2_text || defaultConfig.testimonial_2_text],
+          ["testimonial_2_author", config.testimonial_2_author || defaultConfig.testimonial_2_author],
+          ["testimonial_3_text", config.testimonial_3_text || defaultConfig.testimonial_3_text],
+          ["testimonial_3_author", config.testimonial_3_author || defaultConfig.testimonial_3_author],
+          ["trust_seal_title", config.trust_seal_title || defaultConfig.trust_seal_title],
+          ["trust_seal_subtitle", config.trust_seal_subtitle || defaultConfig.trust_seal_subtitle],
+          ["trust_seal_desc", config.trust_seal_desc || defaultConfig.trust_seal_desc],
+          ["final_cta_title", config.final_cta_title || defaultConfig.final_cta_title],
+          ["final_cta_subtitle", config.final_cta_subtitle || defaultConfig.final_cta_subtitle],
+          ["final_cta_button", config.final_cta_button || defaultConfig.final_cta_button],
+          ["about_page_title", config.about_page_title || defaultConfig.about_page_title],
+          ["about_page_subtitle", config.about_page_subtitle || defaultConfig.about_page_subtitle],
+          ["company_history", config.company_history || defaultConfig.company_history],
+          ["company_mission", config.company_mission || defaultConfig.company_mission],
+          ["company_vision", config.company_vision || defaultConfig.company_vision],
+          ["company_values", config.company_values || defaultConfig.company_values],
+          ["services_page_title", config.services_page_title || defaultConfig.services_page_title],
+          ["services_page_subtitle", config.services_page_subtitle || defaultConfig.services_page_subtitle],
+          ["service_full_1_title", config.service_full_1_title || defaultConfig.service_full_1_title],
+          ["service_full_1_desc", config.service_full_1_desc || defaultConfig.service_full_1_desc],
+          ["service_full_2_title", config.service_full_2_title || defaultConfig.service_full_2_title],
+          ["service_full_2_desc", config.service_full_2_desc || defaultConfig.service_full_2_desc],
+          ["service_full_3_title", config.service_full_3_title || defaultConfig.service_full_3_title],
+          ["service_full_3_desc", config.service_full_3_desc || defaultConfig.service_full_3_desc],
+          ["service_full_4_title", config.service_full_4_title || defaultConfig.service_full_4_title],
+          ["service_full_4_desc", config.service_full_4_desc || defaultConfig.service_full_4_desc],
+          ["cases_page_title", config.cases_page_title || defaultConfig.cases_page_title],
+          ["cases_page_subtitle", config.cases_page_subtitle || defaultConfig.cases_page_subtitle],
+          ["cases_cta_title", config.cases_cta_title || defaultConfig.cases_cta_title],
+          ["cases_cta_subtitle", config.cases_cta_subtitle || defaultConfig.cases_cta_subtitle],
+          ["cases_cta_button", config.cases_cta_button || defaultConfig.cases_cta_button],
+          ["analysis_page_title", config.analysis_page_title || defaultConfig.analysis_page_title],
+          ["analysis_page_subtitle", config.analysis_page_subtitle || defaultConfig.analysis_page_subtitle],
+          ["analysis_form_title", config.analysis_form_title || defaultConfig.analysis_form_title],
+          ["analysis_form_subtitle", config.analysis_form_subtitle || defaultConfig.analysis_form_subtitle],
+          ["blog_page_title", config.blog_page_title || defaultConfig.blog_page_title],
+          ["blog_page_subtitle", config.blog_page_subtitle || defaultConfig.blog_page_subtitle],
+          ["blog_post_1_title", config.blog_post_1_title || defaultConfig.blog_post_1_title],
+          ["blog_post_1_desc", config.blog_post_1_desc || defaultConfig.blog_post_1_desc],
+          ["blog_post_2_title", config.blog_post_2_title || defaultConfig.blog_post_2_title],
+          ["blog_post_2_desc", config.blog_post_2_desc || defaultConfig.blog_post_2_desc],
+          ["blog_post_3_title", config.blog_post_3_title || defaultConfig.blog_post_3_title],
+          ["blog_post_3_desc", config.blog_post_3_desc || defaultConfig.blog_post_3_desc],
+          ["contact_page_title", config.contact_page_title || defaultConfig.contact_page_title],
+          ["contact_page_subtitle", config.contact_page_subtitle || defaultConfig.contact_page_subtitle],
+          ["contact_phone", config.contact_phone || defaultConfig.contact_phone],
+          ["contact_whatsapp", config.contact_whatsapp || defaultConfig.contact_whatsapp],
+          ["contact_email", config.contact_email || defaultConfig.contact_email]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d28e1ba82eead09',t:'MTc3MTg3MjM0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
